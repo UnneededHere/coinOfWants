@@ -13,11 +13,13 @@
 
 <template name="eventPage">
   <h1>Hello, and welcome to:</h1>
-  <h1>{{eventName}}</h1>
-  {{personName}} would like to see:
+  <h1>{{eventDetails.eventName}}</h1>
+  {{#each guy in peopleNeeds}}
+  {{guy.person}} would like to see:
   <ul>
-    {{#each need in needs}}
+    {{#each need in guy.needs}}
     <li>{{need}}</li>
     {{/each}}
   </ul>
+  {{/each}}
 </template>

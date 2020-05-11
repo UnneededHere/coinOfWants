@@ -21,3 +21,4 @@ Router.route('/event/:_id', {
     }
   }
 })
+

@@ -1,43 +1,45 @@
-var justPeopleThings = [
-    ["Kyle Scorgie", ["Ben McCallum", "Jon Ewen"]],
-    ["Jon Ewen", ["Ben Fay"]],
-    ["Ben McCallum", ["Kyle Scorgie", "Hugo Pirie"]],
-    ["Ben Fay", ["Jon Ewen"]],
-    ["Hugo Pirie", ["Kyle Scorgie"]]
-  ]
-  
-  var guysWeSaw = []
-  
+function myRealFunFunction(justPeopleThings) {
+  let guysWeSaw = []
+
   function innerFunction(newGuy) {
     console.log(guysWeSaw)
-    for(var i = 0; i < guysWeSaw.length; i++) {
-      if(guysWeSaw[i] == newGuy) {
+    for (let i = 0; i < guysWeSaw.length; i++) {
+      if (guysWeSaw[i] == newGuy) {
         return true
       }
     }
-  
-    var theProfile = false
-    for(var i = 0; i < justPeopleThings.length; i++) {
-      if(justPeopleThings[i][0] == newGuy) {
+
+    let theProfile = false
+    for (let i = 0; i < justPeopleThings.length; i++) {
+      if (justPeopleThings[i].person == newGuy) {
         theProfile = justPeopleThings[i]
       }
     }
-    if(!theProfile) {
+    if (!theProfile) {
       return false;
     }
-  
-    if(theProfile[1] == true) {
+
+    if (theProfile.needs == true) {
       return true
     }
-  
+
     guysWeSaw[guysWeSaw.length] = newGuy
-    for(var i = 0; i < theProfile[1].length; i++) {
-      if (innerFunction(theProfile[1][i]) == false) {
+    for (let i = 0; i < theProfile.needs.length; i++) {
+      if (innerFunction(theProfile.needs[i]) == false) {
         return false
       }
     }
-  
+
     return true
   }
-  
-  console.log(innerFunction(justPeopleThings[0][0]))
+
+  console.log(innerFunction(justPeopleThings[0].person))
+}
+
+myRealFunFunction([
+  { person: "Kyle Scorgie", needs: ["Ben McCallum", "Jon Ewen"] },
+  { person: "Jon Ewen", needs: ["Ben Fay"] },
+  { person: "Ben McCallum", needs: ["Kyle Scorgie", "Hugo Pirie"] },
+  { person: "Ben Fay", needs: ["Jon Ewen"] },
+  { person: "Hugo Pirie", needs: ["Kyle Scorgie"] }
+])

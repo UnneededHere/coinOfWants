@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
 import './main.html';
-import { Events, Persons } from '../import/api/wacky';
+import { Events, Persons, findOutWhetherTheyBeGoing } from '../import/api/wacky';
 import { Mongo } from 'meteor/mongo';
 
 Router.route('/home', function() {
@@ -11,14 +11,14 @@ Router.route('/home', function() {
 Router.route('/', function() {
   Router.go('/home')
 })
-Router.route('/event/:_id', {
-  template: 'eventPage',
+Router.route('/event/:eventID/:personID', {
+  template: 'personPage',
   data: function() {
-    var currentEvent = new Mongo.ObjectID(this.params._id);
+    const ourGuy = Persons.findOne({ _id: new Mongo.ObjectID(this.params.personID), relEvent: this.params.eventID })
     return {
-      eventDetails: Events.findOne({ _id: currentEvent }),
-      peopleNeeds: Persons.find({ relEvent: this.params._id })
+      eventDetails: Events.findOne({ _id: new Mongo.ObjectID(this.params.eventID) }),
+      peopleNeeds: ourGuy,
+      willTheyCome: undefined
     }
   }
 })
-

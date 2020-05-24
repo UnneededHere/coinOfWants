@@ -11,15 +11,14 @@
   <img src="https://www.artic.edu/iiif/2/b9629cb4-e17d-dcde-4d0f-b70451578ed6/full/1200,/0/default.jpg" height="500px">
 </template>
 
-<template name="eventPage">
+<template name="personPage">
   <h1>Hello, and welcome to:</h1>
   <h1>{{eventDetails.eventName}}</h1>
-  {{#each guy in peopleNeeds}}
-  {{guy.person}} would like to see:
+  {{peopleNeeds.person}} would like to see:
   <ul>
-    {{#each need in guy.needs}}
+    {{#each need in peopleNeeds.needs}}
     <li>{{need}}</li>
     {{/each}}
   </ul>
-  {{/each}}
+  <h4>{{willTheyCome}}</h4>
 </template>
